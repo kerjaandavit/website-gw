@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Davit Hidayat — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=DM+Mono:wght@300;400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --bg: #07090d;
+  --surface: #111520;
+  --border: rgba(255,255,255,0.08);
+  --blue: #6b96b8;
+  --blue2: #90b8d4;
+  --text: #dde4ec;
+  --muted: #5a6475;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Outfit", sans-serif;
+  font-weight: 300;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+}
+
+/* noise overlay */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+}
+
+/* HEADER */
+.header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+.avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid rgba(107,150,184,0.3);
+  margin: 0 auto 16px;
+  overflow: hidden;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar-initials {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  color: var(--blue);
+}
+.header-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.8rem;
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.header-name em { font-style: italic; color: var(--blue); }
+.header-role {
+  font-family: "DM Mono", monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+}
+.header-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+/* SECTION LABEL */
+.section-label {
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--blue);
+  margin: 32px 0 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+.section-label::before,
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* LINK CARDS */
+.link-card {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  text-decoration: none;
+  color: var(--text);
+  transition: all 0.3s ease;
+  margin-bottom: 10px;
+  position: relative;
+  overflow: hidden;
+}
+.link-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--blue);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.link-card:hover {
+  border-color: rgba(107,150,184,0.35);
+  transform: translateX(4px);
+  background: #141a26;
+}
+.link-card:hover::before { opacity: 1; }
+.link-card:last-child { margin-bottom: 0; }
+
+.card-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  font-size: 1.2rem;
+}
+.card-icon svg { width: 22px; height: 22px; }
+
+.card-text { flex: 1; }
+.card-title {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: var(--text);
+  margin-bottom: 3px;
+}
+.card-desc {
+  font-family: "DM Mono", monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+.card-arrow {
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: all 0.3s;
+  flex-shrink: 0;
+}
+.link-card:hover .card-arrow {
+  color: var(--blue);
+  transform: translateX(3px);
+}
+
+/* Icon backgrounds */
+.icon-analytics  { background: rgba(66,133,244,0.12); }
+.icon-marketing  { background: rgba(234,67,53,0.12); }
+.icon-performance { background: rgba(107,150,184,0.12); }
+.icon-wa         { background: rgba(37,211,102,0.12); }
+.icon-linkedin   { background: rgba(10,102,194,0.12); }
+.icon-back       { background: rgba(107,150,184,0.08); }
+
+/* Icon colors */
+.icon-analytics svg  { color: #4285F4; }
+.icon-marketing svg  { color: #EA4335; }
+.icon-performance svg { color: var(--blue); }
+.icon-wa svg         { color: #25d366; }
+.icon-linkedin svg   { color: #0A66C2; }
+.icon-back svg       { color: var(--muted); }
+
+/* FOOTER */
+.footer {
+  margin-top: 40px;
+  text-align: center;
+}
+.footer a {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--muted);
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.footer a:hover { color: var(--blue); }
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue); }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="avatar">
+      <span class="avatar-initials">DH</span>
+    </div>
+    <h1 class="header-name">Davit <em>Hidayat</em></h1>
+    <div class="header-role">Marketing &amp; Performance Analyst · Jakarta, ID</div>
+    <p class="header-desc">Selected work across data analytics, digital marketing, and performance improvement.</p>
+  </div>
+
+  <!-- PORTFOLIO LINKS -->
+  <div class="section-label">Portfolio</div>
+
+  <a href="#" class="link-card" target="_blank">
+    <div class="card-icon icon-analytics">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 20V10M12 20V4M6 20v-6"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">Data Analyst Portfolio</div>
+      <div class="card-desc">Dashboards · KPI Systems · Automation</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a href="#" class="link-card" target="_blank">
+    <div class="card-icon icon-performance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/>
+        <polyline points="16 7 22 7 22 13"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">Performance Analyst Portfolio</div>
+      <div class="card-desc">SLA Monitoring · Productivity Analytics · Reporting</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a href="#" class="link-card" target="_blank">
+    <div class="card-icon icon-marketing">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="10"/>
+        <path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">Digital Marketing Portfolio</div>
+      <div class="card-desc">Campaigns · Ads · Social Media</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <!-- CONTACT -->
+  <div class="section-label">Connect</div>
+
+  <a href="https://wa.me/6283131315111?text=Halo%20Davit%2C%20I%20came%20across%20your%20portfolio%20and%20I%20am%20interested%20in%20discussing%20a%20potential%20collaboration%20with%20you.%20Are%20you%20available%20to%20connect%3F" class="link-card" target="_blank">
+    <div class="card-icon icon-wa">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.16-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.48-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51-.17 0-.37-.01-.57-.01-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.07c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.41.25-.7.25-1.29.17-1.41-.07-.12-.27-.2-.57-.35zm-5.42 7.4h-.004a9.87 9.87 0 01-5.03-1.38l-.36-.21-3.74.98 1-3.65-.24-.37A9.86 9.86 0 01.16 11.9C.16 6.44 4.6 2 10.05 2c2.64 0 5.12 1.03 6.99 2.9a9.83 9.83 0 012.89 6.99c0 5.45-4.44 9.89-9.88 9.89zm8.41-18.3A11.82 11.82 0 0010.05 0C4.5 0 .16 4.34.16 9.9c0 2.1.55 4.14 1.59 5.94L0 24l6.3-1.65a11.88 11.88 0 005.68 1.45h.005c6.55 0 11.89-5.34 11.89-11.89a11.82 11.82 0 00-3.48-8.41z"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">WhatsApp</div>
+      <div class="card-desc">+62 831-3131-5111</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <a href="https://www.linkedin.com/in/davit-hidayat" class="link-card" target="_blank">
+    <div class="card-icon icon-linkedin">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 110-4.12 2.06 2.06 0 010 4.12zm1.78 13.02H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45C23.2 24 24 23.227 24 22.27V1.73C24 .77 23.2 0 22.22 0z"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">LinkedIn</div>
+      <div class="card-desc">Davit Hidayat</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <!-- BACK TO PORTFOLIO -->
+  <div class="section-label">More</div>
+
+  <a href="index.html" class="link-card">
+    <div class="card-icon icon-back">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+        <polyline points="9 22 9 12 15 12 15 22"/>
+      </svg>
+    </div>
+    <div class="card-text">
+      <div class="card-title">Main Portfolio Website</div>
+      <div class="card-desc">Full profile · Experience · Skills</div>
+    </div>
+    <span class="card-arrow">→</span>
+  </a>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <a href="index.html">© 2025 Davit Hidayat</a>
+  </div>
+
+</div>
+
+</body>
+</html>
